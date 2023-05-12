@@ -1,7 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import RegistrationForm from './view/RegistrationForm.vue'
-import ConfirmationView from './view/ConfirmationView.vue';
+import SummaryView from './view/SummaryView.vue'
+import ConfirmationView from './view/ConfirmationView.vue'
 
 const mode = ref(0)
 </script>
@@ -13,6 +14,7 @@ const mode = ref(0)
     </header>
     <main class="mt-4">
         <RegistrationForm v-if="mode === 0" @submit="mode = 1" />
+        <SummaryView v-else-if="mode === 1" @submit="mode = 2"/>
         <ConfirmationView v-else @again="mode = 0" />
     </main>
 </template>

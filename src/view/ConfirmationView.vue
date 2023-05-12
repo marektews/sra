@@ -7,7 +7,7 @@ const onAgain = () => {
 </script>
 
 <template>
-    <div class="alert alert-success" role="alert">
+    <div class="alert alert-success my-alert" role="alert">
         Zgłoszenie zostało poprawnie wysłane. Dziękujemy!
     </div>
 
@@ -18,8 +18,8 @@ const onAgain = () => {
     </div>
 </template>
 
-<style>
-.alert {
+<style scoped>
+.my-alert {
     font-size: 1.3rem;
 }
 </style>
