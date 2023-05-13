@@ -1,9 +1,5 @@
 <script setup>
-const emit = defineEmits(['again'])
-
-const onAgain = () => {
-    emit('again')
-}
+defineEmits(['again'])
 </script>
 
 <template>
@@ -11,8 +7,8 @@ const onAgain = () => {
         Zgłoszenie zostało poprawnie wysłane. Dziękujemy!
     </div>
 
-    <div>
-        <button class="btn btn-lg btn-outline-primary" @click="onAgain">
+    <div class="mt-5">
+        <button class="btn btn-lg btn-outline-primary" @click="$emit('again')">
             Zarejestruj następny pojazd
         </button>
     </div>
