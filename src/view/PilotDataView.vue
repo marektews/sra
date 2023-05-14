@@ -43,7 +43,7 @@ const isNextBtnEnabled = computed(() => {
 </script>
 
 <template>
-    <div>
+    <div class="container">
         <TitleView>
             Dane kontaktowe zborowego pilota dedykowanego do autokaru / autobusu / busa
         </TitleView>

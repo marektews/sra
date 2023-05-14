@@ -3,10 +3,11 @@ import { ref, computed } from 'vue'
 import FooterButtons from '@/components/btns/FooterButtons.vue'
 import TitleView from '@/components/TitleView.vue'
 import SelectCongregation from '@/components/SelectCongregation.vue'
+import ValidityInputGroup from '@/components/input/ValidityInputGroup.vue'
 
 const props = defineProps(['modelValue'])
 
-const congregation = computed({
+const congregationName = computed({
     get() {
         return props.modelValue
     },
@@ -14,6 +15,8 @@ const congregation = computed({
         emit('update:modelValue', value)
     }
 })
+
+const congregationNumber = ref()
 
 const NextBtnEnabled = ref(true)
 
@@ -32,12 +35,20 @@ function onSelectCongregationFinished(finished) {
     <div class="container">
         
         <TitleView>
-            Nazwa zboru
+            Logowanie do systemu
         </TitleView>
 
         <SelectCongregation 
-            v-model="congregation"
+            v-model="congregationName"
             @finished="onSelectCongregationFinished"
+        />
+
+        <ValidityInputGroup
+            v-model="congregationNumber"
+            class="mt-3"
+            type="password"
+            title="Hasło"
+            required
         />
 
         <FooterButtons

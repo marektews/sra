@@ -1,9 +1,13 @@
 <script setup>
+import { ref, computed } from 'vue'
 import FooterButtons from '@/components/btns/FooterButtons.vue'
 import TitleView from '@/components/TitleView.vue'
+import ValidityInputGroup from '../components/input/ValidityInputGroup.vue';
 
 const props = defineProps(['data'])
 defineEmits('submit', 'back', 'correction')
+
+const confirmationEmail = ref('')
 
 function strBusType(v) {
     switch(v) {
@@ -50,10 +54,12 @@ function strDayName(idx) {
     }
     return idx
 }
+
+const isSubmitEnabled = ref(false)
 </script>
 
 <template>
-    <div>
+    <div class="container">
         <TitleView>
             Podsumowanie
         </TitleView>
@@ -176,14 +182,35 @@ function strDayName(idx) {
             <div class="summary-cell-label">Treść:</div>
             <div class="summary-cell-value multiline">
                 <a href="#" @click="$emit('correction', 7)">
-                    {{ props.data.info }}
+                    <span v-if="props.data.info.length">
+                        {{ props.data.info }}
+                    </span>
+                    <span v-else>
+                        # Nie podano żadnych informacji #
+                    </span>
                 </a>
+            </div>
+        </div>
+
+        <div class="alert alert-success">
+            <ValidityInputGroup
+                v-model="confirmationEmail"
+                type="email"
+                title="Adres e-mail do potwierdzenia rejestracji"
+                placeholder="nazwa@domena.pl"
+                required
+                @valid="isSubmitEnabled = true"
+            />
+            <div class="mt-3">
+                <div>Podaj swój prywatny adres poczty elektronicznej, aby otrzymać potwierdzenie wysłania zgłoszenia.</div>
+                <div>Nic nie będziesz musiał odsyłać. Otrzymasz tylko do wglądu kopię tego zgłoszenia.</div>
             </div>
         </div>
 
         <FooterButtons
             :next-visible="false"
             :submit-visible="true"
+            :submit-enabled="isSubmitEnabled"
             @back="$emit('back')"
             @submit="$emit('submit')"
         />
@@ -193,6 +220,7 @@ function strDayName(idx) {
 <style scoped>
 .summary-layout {
     margin-top: 2rem;
+    margin-bottom: 4rem;
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: first baseline;

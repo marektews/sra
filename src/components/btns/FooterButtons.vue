@@ -3,7 +3,7 @@ import NextButton from './NextButton.vue'
 import BackButton from './BackButton.vue'
 import SubmitButton from './SubmitButton.vue'
 
-const emit = defineEmits(['back', 'next', 'submit'])
+defineEmits(['back', 'next', 'submit'])
 
 const props = defineProps({
     backVisible: { type: Boolean, default: true },

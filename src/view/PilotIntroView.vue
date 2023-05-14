@@ -24,7 +24,7 @@ function onBackClicked() {
 </script>
 
 <template>
-    <div>
+    <div class="container">
         <TitleView>
             Konfiguracja pilotów dedykowanych do autokaru / autobusu / busa
         </TitleView>

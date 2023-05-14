@@ -11,8 +11,7 @@ import AdditionalInformation from './view/AdditionalInformation.vue'
 import SummaryView from './view/SummaryView.vue'
 import ConfirmationView from './view/ConfirmationView.vue'
 
-const mode = ref(0)
-const data = reactive({
+const templateData = {
     congregation: "",
     bus: {
         type: "",
@@ -50,7 +49,18 @@ const data = reactive({
         }
     ],
     info: ""
-})
+}
+
+
+const mode = ref(0)
+let data = reactive(JSON.parse(JSON.stringify(templateData)))
+
+function onAgain() {
+    let newData = reactive(JSON.parse(JSON.stringify(templateData)))
+    newData.congregation = data.congregation
+    data = newData
+    mode.value = 2
+}
 </script>
 
 <template>
@@ -109,7 +119,7 @@ const data = reactive({
             />
 
             <ConfirmationView v-else 
-                @again="mode = 1" 
+                @again="onAgain" 
             />
         </main>
     </div>

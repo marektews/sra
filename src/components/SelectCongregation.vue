@@ -56,6 +56,10 @@ function isFinished(value) {
 
 <template>
     <div>
+        <label class="form-label">
+            Nazwa zboru
+        </label>
+
         <input 
             v-model="name"
             type="text" 

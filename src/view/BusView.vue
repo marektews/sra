@@ -43,7 +43,7 @@ const isNextBtnEnabled = computed(() => {
 </script>
 
 <template>
-    <div>
+    <div class="container">
         <TitleView>
             Dane autokaru / autobusu / busa
         </TitleView>
@@ -54,10 +54,11 @@ const isNextBtnEnabled = computed(() => {
                 :value="bus.type" 
                 @input="onTypeChanged($event)"
             >
+                <option value="minibus_9">Minibus do 9 osób</option>
                 <option value="minibus_30">Minibus do 30 osób</option>
                 <option value="autokar_50">Autokar do 50 osób</option>
                 <option value="autokar_70">Autokar 60-70 osób</option>
-                <option value="autobus_12m">Autobus miejski - 12m (krótki)</option>
+                <option value="autobus_12m">Autobus miejski - 12m (pojedyńczy)</option>
                 <option value="autobus_18m">Autobus miejski - 18m (przegubowy)</option>
             </select>
         </div>
@@ -68,11 +69,12 @@ const isNextBtnEnabled = computed(() => {
                 :value="bus.distance"
                 @input="onDistanceChanged($event)"
             >
-                <option value="10km">do 10 km</option>
-                <option value="20km">do 20 km</option>
+                <option value="15km">do 15 km</option>
+                <option value="25km">do 25 km</option>
                 <option value="50km">do 50 km</option>
                 <option value="100km">do 100 km</option>
-                <option value="more100km">powyżej 100 km</option>
+                <option value="200km">do 200 km</option>
+                <option value="more200km">powyżej 200 km</option>
             </select>
         </div>
 
@@ -91,6 +93,10 @@ const isNextBtnEnabled = computed(() => {
                     @input="onP2Changed($event)"
                 />
                 <label class="form-check-label" for="p2">Autokar / autobus tylko dowozi pasażerów, odjeżdza i przyjeżdza odebrać ich po programie</label>
+            </div>
+            <div class="ms-4 mt-2">
+                <i class="fa-solid fa-circle-exclamation" />
+                <span class="ms-2">Zaznacz odpowiednie pola dla rejestrowanego pojazdu</span>
             </div>
         </div>
 

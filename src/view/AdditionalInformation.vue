@@ -15,7 +15,7 @@ function onBackClicked() {
 </script>
 
 <template>
-    <div>
+    <div class="container">
         <TitleView>
             Uwagi i dodatkowe informacje 
         </TitleView>

@@ -1,5 +1,4 @@
 <script setup>
-import FooterButtons from '@/components/btns/FooterButtons.vue'
 import TitleView from '@/components/TitleView.vue'
 
 const emit = defineEmits('next')
@@ -16,13 +15,12 @@ function onNextClicked() {
         </TitleView>
 
         <div>
-            <div>... jakieś zgrabne info ...</div>
+            Zaloguj się za pomocą otrzymanych danych i uważnie wypełnij formularz.
         </div>
 
-        <FooterButtons 
-            @click="onNextClicked"
-            :back-visible="false"
-        />
+        <button class="mt-5 btn btn-lg btn-outline-primary" @click="onNextClicked">
+            ZACZYNAMY
+        </button>
 
     </div>
 </template>
