@@ -10,20 +10,23 @@ const emit = defineEmits(['update:modelValue', 'back', 'next'])
 
 const pilot = reactive(props.modelValue)
 
+const onPhoneDirectChanged = () => {
+    refPhoneNumber.value.reportValidity()
+}
 const phoneLength = computed(() => {
-    return pilot.phone.direct === "+7" ? 13 : 11
+    return pilot.phone.direct === "+7" ? 10 : 9
 })
 const phoneFormat = computed(() => {
-    if(phoneLength.value === 13)
-        return "123 456 78 90"
+    if(phoneLength.value === 10)
+        return "Wpisz 10 cyfr; format: 1234567890"
     else
-        return "123 456 789"
+        return "Wpisz 9 cyfr; format: 123456789"
 })
 
 const phonePattern = computed(() => {
     return pilot.phone.direct === "+7"
-        ? "[0-9]{3} [0-9]{3} [0-9]{2} [0-9]{2}"
-        : "[0-9]{3} [0-9]{3} [0-9]{3}"
+        ? "[0-9]{10}"
+        : "[0-9]{9}"
 })
 
 function onNextClicked() {
@@ -75,6 +78,7 @@ const isNextBtnEnabled = computed(() => {
                     v-model="pilot.phone.direct"
                     class="form-select form-select-lg flex-grow-0" 
                     style="min-width: 90pt"
+                    @change="onPhoneDirectChanged"
                 >
                     <option value="+48">PL: +48</option>
                     <option value="+7">RU: +7</option>

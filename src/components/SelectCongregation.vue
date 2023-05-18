@@ -33,7 +33,7 @@ watch(name, async (value, old) => {
 
 async function getHints() {
     try {
-        const res = await fetch(`/api/srp/congregations/search/${name.value}`)
+        const res = await fetch(`/api/sra/search/congregations/${name.value}`)
         if(res.status === 200) {
             hints.value = await res.json()
             isFinished(name.value)
@@ -70,7 +70,9 @@ function isFinished(value) {
         />
 
         <datalist id="hints">
-            <option v-for="(item, index) in hints" :value="item" :key="index" />
+            <option v-for="(item, index) in hints" :key="index" 
+                :value="item"
+            />
         </datalist>       
     </div>
 </template>

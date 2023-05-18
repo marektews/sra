@@ -1,5 +1,5 @@
 <script setup>
-import {ref, computed, onMounted} from 'vue'
+import {ref, computed, watch, onMounted} from 'vue'
 
 const valid = ref(null)
 const inputCtrl = ref(null)
@@ -14,6 +14,20 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update:modelValue', 'valid'])
+
+const onInput = (e) => {
+    // console.log("onInput: value =", e.target.value)
+    emit('update:modelValue', e.target.value)
+
+    if(e.target.value.length === 0) {
+        valid.value = null
+        emit('valid', valid.value)
+    }
+    else {
+        valid.value = e.target.checkValidity()
+        emit('valid', valid.value)
+    }
+}
 
 const onBlur = (e) => {
     valid.value = e.target.checkValidity()
@@ -36,6 +50,12 @@ onMounted(() => {
         emit('valid', valid.value)
     }
 })
+
+watch(() => props.modelValue, (newValue) => {
+    // console.log("Watcher:", newValue)
+    if(newValue.length === 0)
+        valid.value = null
+})
 </script>
 
 <template>
@@ -49,7 +69,7 @@ onMounted(() => {
         :required="props.required"
 
         :value="props.modelValue"
-        @input="$emit('update:modelValue', $event.target.value)"
+        @input="onInput($event)"
 
         @blur="onBlur($event)"
     />

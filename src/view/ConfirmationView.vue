@@ -4,7 +4,12 @@ defineEmits(['again'])
 
 <template>
     <div class="alert alert-success my-alert" role="alert">
-        Zgłoszenie zostało poprawnie wysłane. Dziękujemy!
+        <div>Dziękujemy!</div>
+        <div>Zgłoszenie zostało poprawnie wysłane.</div>
+    </div>
+
+    <div>
+        Jeśli zarejestrowałeś wszystkie pojazdy możesz bezpiecznie zamknąć bieżącą zakładkę przeglądarki.
     </div>
 
     <div class="mt-5">

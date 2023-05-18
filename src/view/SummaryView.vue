@@ -5,16 +5,17 @@ import TitleView from '@/components/TitleView.vue'
 import ValidityInputGroup from '../components/input/ValidityInputGroup.vue';
 
 const props = defineProps(['data'])
-defineEmits('submit', 'back', 'correction')
+const emit = defineEmits('submit', 'back', 'correction')
 
 const confirmationEmail = ref('')
 
 function strBusType(v) {
     switch(v) {
+        case "minibus_9": return "minibus do 9 osób"
         case "minibus_30": return "minibus do 30 osób"
         case "autokar_50": return "autokar do 50 osób"
         case "autokar_70": return "autokar 60-70 osób"
-        case "autobus_12m": return "autobus miejski - 12m (krótki)"
+        case "autobus_12m": return "autobus miejski - 12m (pojedyńczy)"
         case "autobus_18m": return "autobus miejski - 18m (przegubowy)"
     }
     return v
@@ -22,11 +23,12 @@ function strBusType(v) {
 
 function strBusDistance(v) {
     switch(v) {
-        case "10km": return "do 10 km"
-        case "20km": return "do 20 km"
+        case "15km": return "do 15 km"
+        case "25km": return "do 25 km"
         case "50km": return "do 50 km"
         case "100km": return "do 100 km"
-        case "more100km": return "powyżej 100 km"
+        case "200km": return "do 200 km"
+        case "more200km": return "powyżej 200 km"
     }
     return v
 }
@@ -56,6 +58,27 @@ function strDayName(idx) {
 }
 
 const isSubmitEnabled = ref(false)
+
+function onSubmit() {
+    let bodyData = {
+        registration_data: props.data,
+        confirmation_email: confirmationEmail.value
+    }
+    fetch('/api/sra/submit', {
+        method: "POST",
+        cache: "no-cache",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(bodyData)
+    })
+    .then(resp => {
+        if(resp.status === 200) {
+            emit('submit')
+        }
+    })
+    .catch(e => console.error("Submit SRA", e))
+}
 </script>
 
 <template>
@@ -212,7 +235,7 @@ const isSubmitEnabled = ref(false)
             :submit-visible="true"
             :submit-enabled="isSubmitEnabled"
             @back="$emit('back')"
-            @submit="$emit('submit')"
+            @submit="onSubmit"
         />
     </div>
 </template>

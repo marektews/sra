@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue'
-import FooterButtons from '@/components/btns/FooterButtons.vue'
+import LoginButton from '@/components/btns/LoginButton.vue'
 import TitleView from '@/components/TitleView.vue'
 import SelectCongregation from '@/components/SelectCongregation.vue'
 import ValidityInputGroup from '@/components/input/ValidityInputGroup.vue'
@@ -16,18 +16,43 @@ const congregationName = computed({
     }
 })
 
-const congregationNumber = ref()
+const showAlert = ref(false)
+const congregationNumber = ref('')
 
-const NextBtnEnabled = ref(true)
+const isLoginBtnEnabled = computed({
+    get() { return congregationName.value.length > 0 && congregationNumber.value.length > 0 }
+})
 
 const emit = defineEmits(['update:modelValue', 'next'])
-function onNextClicked() {
-    emit('next')
+function onLoginClicked() {
+    let data = {
+        login: congregationName.value,
+        passwd: congregationNumber.value
+    }
+    fetch('/api/auth/login', {
+        method: "POST",
+        cache: "no-cache",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    })
+    .then(resp => {
+        if(resp.status === 200) {
+            emit('next')
+        }
+        else {
+            showAlert.value = true
+            congregationNumber.value = ''
+        }
+    })
+    .catch(e => {
+        console.error('Logging:', e)
+    })
 }
 
-function onSelectCongregationFinished(finished) {
-    // NextBtnEnabled.value = 
-    finished
+function onTryAgain() {
+    showAlert.value = false
 }
 </script>
 
@@ -38,24 +63,33 @@ function onSelectCongregationFinished(finished) {
             Logowanie do systemu
         </TitleView>
 
-        <SelectCongregation 
-            v-model="congregationName"
-            @finished="onSelectCongregationFinished"
-        />
+        <template v-if="!showAlert">
+            <SelectCongregation 
+                v-model="congregationName"
+            />
 
-        <ValidityInputGroup
-            v-model="congregationNumber"
-            class="mt-3"
-            type="password"
-            title="Hasło"
-            required
-        />
+            <ValidityInputGroup
+                v-model="congregationNumber"
+                class="mt-3"
+                type="password"
+                title="Hasło"
+                required
+            />
 
-        <FooterButtons
-            :back-visible="false"
-            :next-enabled="NextBtnEnabled"
-            @next="onNextClicked"
-        />
+            <LoginButton
+                class="mt-5"
+                :disabled="!isLoginBtnEnabled"
+                @click="onLoginClicked"
+            />
+        </template>
+
+        <div v-else class="alert alert-danger mt-5">
+            <div>Podane dane są niepoprawne!</div>
+            <div>Sprawdź czy wybrałeś z podpowiedzi pełną nazwę zboru oraz czy poprawnie wpisałeś otrzymane hasło.</div>
+            <button class="btn btn-lg btn-danger mt-3" @click="onTryAgain">
+                Rozumiem, próbujemy jeszcze raz
+            </button>
+        </div>
 
     </div>
 </template>
