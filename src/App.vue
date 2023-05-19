@@ -132,10 +132,6 @@ header {
     gap: 16pt;
     margin-bottom: 24pt;
 }
-/* header > img {
-    width: 50px;
-    height: 50px;
-} */
 header > div {
     font-size: 2rem;
 }
