@@ -60,7 +60,7 @@ function onTryAgain() {
     <div class="container">
         
         <TitleView>
-            Logowanie do systemu
+            Logowanie
         </TitleView>
 
         <template v-if="!showAlert">

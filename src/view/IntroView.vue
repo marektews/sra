@@ -10,9 +10,9 @@ function onNextClicked() {
 <template>
     <div class="container">
         
-        <TitleView>
-            Witaj w systemie rejestracji autokarów
-        </TitleView>
+        <!-- <TitleView>
+            Witamy!
+        </TitleView> -->
 
         <div>
             Zaloguj się za pomocą otrzymanych danych i uważnie wypełnij formularz.

@@ -1,6 +1,6 @@
 {
   "name": "sra",
-  "version": "0.3",
+  "version": "0.4",
   "private": true,
   "scripts": {
     "dev": "vite",

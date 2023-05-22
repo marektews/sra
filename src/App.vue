@@ -68,7 +68,7 @@ function onAgain() {
         <header>
             <!-- <img src="@/assets/logo.svg" /> -->
             <i class="fa-solid fa-registered fa-2xl" />
-            <div>System Rejestracji Autokarów</div>
+            <div>Ankieta rejestracji autokarów / autobusów</div>
         </header>
 
         <main class="mt-4">

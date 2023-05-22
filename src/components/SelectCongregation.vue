@@ -65,9 +65,12 @@ function isFinished(value) {
             type="text" 
             class="form-control form-select-lg"
             list="hints"
-            title="Wpisz 3 znaki, a pojawi się lista podpowiedzi ułatwiająca wybór"
-            placeholder="Wpisz 3 znaki, a pojawi się lista podpowiedzi ułatwiająca wybór"
+            placeholder="Wpisz 3 znaki i poczekaj chwilkę"
+            title="Wpisz 3 znaki i poczekaj chwilkę, a pojawi się lista podpowiedzi ułatwiająca wybór nazwy zboru"
         />
+        <small>
+            Wpisz 3 znaki i poczekaj chwilkę, a pojawi się lista podpowiedzi ułatwiająca wybór nazwy zboru
+        </small>
 
         <datalist id="hints">
             <option v-for="(item, index) in hints" :key="index" 
