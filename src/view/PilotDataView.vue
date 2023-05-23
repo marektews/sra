@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, computed, onBeforeUnmount } from 'vue'
 import FooterButtons from '@/components/btns/FooterButtons.vue'
 import TitleView from '@/components/TitleView.vue'
 import ValidityInput from '@/components/input/ValidityInput.vue'
@@ -9,9 +9,11 @@ const props = defineProps(['modelValue', 'day'])
 const emit = defineEmits(['update:modelValue', 'back', 'next'])
 
 const pilot = reactive(props.modelValue)
+const dupPilot = ref(false)
+const timer = ref(null)
 
-const onPhoneDirectChanged = () => {
-    refPhoneNumber.value.reportValidity()
+const onPhoneDirectChanged = (e) => {
+    e.target.reportValidity()
 }
 const phoneLength = computed(() => {
     return pilot.phone.direct === "+7" ? 10 : 9
@@ -29,9 +31,41 @@ const phonePattern = computed(() => {
         : "[0-9]{9}"
 })
 
+onBeforeUnmount(() => {
+    if(timer.value != null) {
+        clearTimeout(timer.value)
+        timer.value = null
+    }
+})
+
 function onNextClicked() {
     emit('update:modelValue', pilot)
-    emit('next')
+
+    let data = {
+        phone: pilot.phone
+    }
+    fetch('/api/sra/check_pilot_duplicate', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if(response.status === 200) {
+            emit('next')
+        }
+        else {
+            dupPilot.value = true
+            if(timer.value == null) {
+                timer.value = setTimeout(() => { 
+                    dupPilot.value = false
+                    clearTimeout(timer.value)
+                    timer.value = null
+                }, 10000)
+            }
+        }
+    })
 }
 function onBackClicked() {
     emit('update:modelValue', pilot)
@@ -105,6 +139,11 @@ const isNextBtnEnabled = computed(() => {
             required
             @valid="validValues[3] = $event"
         />
+
+        <div v-if="dupPilot" class="alert alert-danger mt-4">
+            <div>UWAGA!</div>
+            <div>Ten sam pilot nie może być przypisany do dwóch pojazdów - podaj dane innego pilota.</div>
+        </div>
 
         <FooterButtons
             @next="onNextClicked"
