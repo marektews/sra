@@ -24,7 +24,6 @@ const phoneFormat = computed(() => {
     else
         return "Wpisz 9 cyfr; format: 123456789"
 })
-
 const phonePattern = computed(() => {
     return pilot.phone.direct === "+7"
         ? "[0-9]{10}"
