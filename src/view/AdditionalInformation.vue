@@ -28,7 +28,7 @@ function onBackClicked() {
 
             <div class="alert alert-info mt-2">
                 <h6>Uwaga!</h6>
-                <div>Nie gwarantujemy preferowanych godzin odjazdu spod stadionu.</div>
+                <div>Nie gwarantujemy preferowanych godzin odjazdu spod obiektu kongresowego.</div>
                 <div>Postaramy się uzględnić wszelkie uwagi, jeśli tylko będzie taka możliwość.</div>
             </div>
         </div>
