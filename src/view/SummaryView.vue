@@ -219,7 +219,7 @@ function onSubmit() {
             <ValidityInputGroup
                 v-model="confirmationEmail"
                 type="email"
-                title="Adres e-mail do potwierdzenia rejestracji"
+                title="Adres e-mail do potwierdzenia rejestracji (inny niż w domienie @jwpub.org)"
                 placeholder="nazwa@domena.pl"
                 required
                 @valid="isSubmitEnabled = true"
