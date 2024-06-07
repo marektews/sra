@@ -79,7 +79,17 @@ const isNextBtnEnabled = computed(() => {
         </div>
 
         <div>
-            <label class="form-label">Zapotrzebowanie parkingowe</label>
+            <TitleView>
+                Zapotrzebowanie parkingowe
+            </TitleView>
+
+            <div class="mb-4">
+                <div>UWAGA!</div>
+                <div>Liczba miejsc postojowych dla autokarów jest ograniczona.</div>
+                <div>Zapotrzebowanie na miejsce postojowe zgłoszone po przyjechaniu na obiekt w dniu kongresu może nie zostać zrealizowane.</div>
+                <div>Koniecznie wypełnij to pole po konsultacji z przewoźnikiem!</div>
+            </div>
+
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="parking" id="p1" 
                     :checked="bus.parking_mode === 'needed'"
@@ -87,6 +97,7 @@ const isNextBtnEnabled = computed(() => {
                 />
                 <label class="form-check-label" for="p1">Potrzebne miejsce parkingowe dla autokaru / busa</label>
             </div>
+
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="parking" id="p2" 
                     :checked="bus.parking_mode === 'not_needed'"
@@ -94,6 +105,7 @@ const isNextBtnEnabled = computed(() => {
                 />
                 <label class="form-check-label" for="p2">Autokar / autobus tylko dowozi pasażerów, odjeżdza i przyjeżdza odebrać ich po programie</label>
             </div>
+
             <div class="ms-4 mt-2">
                 <i class="fa-solid fa-circle-exclamation" />
                 <span class="ms-2">Zaznacz odpowiednie pola dla rejestrowanego pojazdu</span>
