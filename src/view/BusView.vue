@@ -1,5 +1,7 @@
 <script setup>
 import { reactive, computed } from 'vue'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import FooterButtons from '@/components/btns/FooterButtons.vue'
 import TitleView from '@/components/TitleView.vue'
 
@@ -107,7 +109,7 @@ const isNextBtnEnabled = computed(() => {
             </div>
 
             <div class="ms-4 mt-2">
-                <i class="fa-solid fa-circle-exclamation" />
+                <FontAwesomeIcon :icon="faCircleExclamation" />
                 <span class="ms-2">Zaznacz odpowiednie pola dla rejestrowanego pojazdu</span>
             </div>
         </div>

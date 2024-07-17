@@ -1,5 +1,7 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import FooterButtons from '@/components/btns/FooterButtons.vue'
 import TitleView from '@/components/TitleView.vue'
 import ValidityInputGroup from '../components/input/ValidityInputGroup.vue';
@@ -89,7 +91,7 @@ function onSubmit() {
 
         <div class="alert alert-danger d-flex flex-row align-items-baseline">
             <div>
-                <i class="fa-solid fa-circle-exclamation"></i>
+                <FontAwesomeIcon :icon="faCircleExclamation" />
             </div>
             <div class="ms-2">
                 <div>
@@ -160,7 +162,7 @@ function onSubmit() {
                 <div class="mt-5"/>
                 <div class="summary-cell-value">
                     <a href="#" @click="$emit('correction', 3)">
-                        <i class="fa-solid fa-circle-exclamation" />
+                        <FontAwesomeIcon :icon="faCircleExclamation" />
                         {{ strPilotMode(props.data.one_pilot) }}
                     </a>
                 </div>
@@ -195,7 +197,7 @@ function onSubmit() {
                 <div class="mt-5"/>
                 <div class="summary-cell-value">
                     <a href="#" @click="$emit('correction', 3)">
-                        <i class="fa-solid fa-circle-exclamation" />
+                        <FontAwesomeIcon :icon="faCircleExclamation" />
                         {{ strPilotMode(props.data.one_pilot) }}
                     </a>
                 </div>

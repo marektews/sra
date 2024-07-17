@@ -1,5 +1,7 @@
 <script setup>
 import { ref, reactive } from 'vue'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faRegistered } from '@fortawesome/free-solid-svg-icons'
 
 import IntroView from './view/IntroView.vue'
 import CongregationView from './view/CongregationView.vue'
@@ -67,7 +69,7 @@ function onAgain() {
     <div class="container">
         <header>
             <!-- <img src="@/assets/logo.svg" /> -->
-            <i class="fa-solid fa-registered fa-2xl" />
+            <FontAwesomeIcon :icon="faRegistered" size="3x" />
             <div>Ankieta rejestracji autokarów / autobusów</div>
         </header>
 
