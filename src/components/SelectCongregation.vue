@@ -4,19 +4,8 @@ import { ref, watch, computed, onBeforeUnmount } from 'vue'
 const hints = ref([])
 const ops = ref(null)
 
-const name = computed({
-    get() {
-        return props.modelValue
-    },
-    set(value) {
-        emit('update:modelValue', value)
-        isFinished(value)
-    }
-})
-
-const props = defineProps(['modelValue'])
-
-const emit = defineEmits(['update:modelValue', 'finished'])
+const name = defineModel()
+const emit = defineEmits(['finished'])
 
 watch(name, async (value, old) => {
     // console.log("Watcher:", value, old)

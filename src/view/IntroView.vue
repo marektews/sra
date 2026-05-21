@@ -1,7 +1,7 @@
 <script setup>
 // import TitleView from '@/components/TitleView.vue'
 
-const emit = defineEmits('next')
+const emit = defineEmits(['next'])
 function onNextClicked() {
     emit('next')
 }

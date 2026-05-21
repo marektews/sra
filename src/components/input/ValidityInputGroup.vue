@@ -4,8 +4,9 @@ import {ref, computed, watch, onMounted} from 'vue'
 const inputCtrl = ref(null)
 const valid = ref(null)
 
+const modelValue = defineModel()
+
 const props = defineProps({
-    modelValue: { type: Object },
     title: { type: String, default: "" },
     type: { type: String, default: "text" },
     maxLength: { type: String, default: "" },
@@ -16,7 +17,7 @@ const props = defineProps({
     required: { type: Boolean, default: false },
 })
 
-const emit = defineEmits(['update:modelValue', 'valid'])
+const emit = defineEmits(['valid'])
 
 const onBlur = (e) => {
     valid.value = e.target.checkValidity()
@@ -29,7 +30,7 @@ const onBlur = (e) => {
 
 const onInput = (e) => {
     // console.log("onInput: value =", e.target.value)
-    emit('update:modelValue', e.target.value)
+    // emit('update:modelValue', e.target.value)
 
     if(e.target.value.length === 0) {
         valid.value = null
@@ -79,7 +80,7 @@ watch(() => props.modelValue, (newValue) => {
             :pattern="props.pattern"
             :required="props.required"
 
-            :value="props.modelValue"
+            v-model="modelValue"
             @input="onInput($event)"
 
             @blur="onBlur($event)"

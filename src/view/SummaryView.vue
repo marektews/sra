@@ -6,8 +6,8 @@ import FooterButtons from '@/components/btns/FooterButtons.vue'
 import TitleView from '@/components/TitleView.vue'
 import ValidityInputGroup from '../components/input/ValidityInputGroup.vue';
 
-const props = defineProps(['data'])
-const emit = defineEmits('submit', 'back', 'correction')
+const props = defineProps(['congregation', 'bus', 'one_pilot', 'pilot', 'info'])
+const emit = defineEmits(['submit', 'back', 'correction'])
 
 const confirmationEmail = ref('')
 
@@ -63,8 +63,14 @@ const isSubmitEnabled = ref(false)
 
 function onSubmit() {
     let bodyData = {
-        registration_data: props.data,
-        confirmation_email: confirmationEmail.value
+        confirmation_email: confirmationEmail.value,
+        registration_data: {
+            congregation: props.congregation,
+            bus: props.bus,
+            one_pilot: props.one_pilot,
+            pilot: props.pilot,
+            info: props.info,
+        },
     }
     fetch('/api/sra/submit', {
         method: "POST",
@@ -109,53 +115,53 @@ function onSubmit() {
             <div class="summary-cell-label">Zbór:</div>
             <div class="summary-cell-value">
                 <a href="#" @click="$emit('correction', 1)">
-                    {{props.data.congregation}}
+                    {{props.congregation}}
                 </a>
             </div>
 
             <div class="summary-cell-label">Długość trasy:</div>
             <div class="summary-cell-value">
                 <a href="#" @click="$emit('correction', 2)">
-                    {{ strBusDistance(props.data.bus.distance) }}
+                    {{ strBusDistance(props.bus.distance) }}
                 </a>
             </div>
 
             <div class="summary-cell-label">Typ pojazdu:</div>
             <div class="summary-cell-value">
                 <a href="#" @click="$emit('correction', 2)">
-                    {{ strBusType(props.data.bus.type) }}
+                    {{ strBusType(props.bus.type) }}
                 </a>
             </div>
 
             <div class="summary-cell-label">Parking:</div>
             <div class="summary-cell-value">
                 <a href="#" @click="$emit('correction', 2)">
-                    {{ strBusParking(props.data.bus.parking_mode) }}
+                    {{ strBusParking(props.bus.parking_mode) }}
                 </a>
             </div>
 
 
             <div class="summary-cell-title">Dane kontaktowe pilota</div>
 
-            <template v-if="props.data.one_pilot">
+            <template v-if="props.one_pilot">
                 <div class="summary-cell-label">Imię i nazwisko:</div>
                 <div class="summary-cell-value">
                     <a href="#" @click="$emit('correction', 4)">
-                        {{ props.data.pilot[0].firstname }} {{ props.data.pilot[0].lastname }}
+                        {{ props.pilot[0].firstname }} {{ props.pilot[0].lastname }}
                     </a>
                 </div>
                 
                 <div class="summary-cell-label">Numer telefonu:</div>
                 <div class="summary-cell-value">
                     <a href="#" @click="$emit('correction', 4)">
-                        {{ props.data.pilot[0].phone.direct }} {{ props.data.pilot[0].phone.number }}
+                        {{ props.pilot[0].phone.direct }} {{ props.pilot[0].phone.number }}
                     </a>
                 </div>
 
                 <div class="summary-cell-label">Adres e-mail:</div>
                 <div class="summary-cell-value">
                     <a href="#" @click="$emit('correction', 4)">
-                        {{ props.data.pilot[0].email }}
+                        {{ props.pilot[0].email }}
                     </a>
                 </div>
 
@@ -163,12 +169,12 @@ function onSubmit() {
                 <div class="summary-cell-value">
                     <a href="#" @click="$emit('correction', 3)">
                         <FontAwesomeIcon :icon="faCircleExclamation" />
-                        {{ strPilotMode(props.data.one_pilot) }}
+                        {{ strPilotMode(props.one_pilot) }}
                     </a>
                 </div>
             </template>
             <template v-else>
-                <template v-for="(pilot, index) in props.data.pilot" :key="index">
+                <template v-for="(pilot, index) in props.pilot" :key="index">
                     <div class="summary-cell-value" :class="{'mt-4': index}">{{ strDayName(index) }}</div>
                     <div/>
                     
@@ -198,7 +204,7 @@ function onSubmit() {
                 <div class="summary-cell-value">
                     <a href="#" @click="$emit('correction', 3)">
                         <FontAwesomeIcon :icon="faCircleExclamation" />
-                        {{ strPilotMode(props.data.one_pilot) }}
+                        {{ strPilotMode(props.one_pilot) }}
                     </a>
                 </div>
             </template>
@@ -207,8 +213,8 @@ function onSubmit() {
             <div class="summary-cell-label">Treść:</div>
             <div class="summary-cell-value multiline">
                 <a href="#" @click="$emit('correction', 7)">
-                    <span v-if="props.data.info.length">
-                        {{ props.data.info }}
+                    <span v-if="props.info.length">
+                        {{ props.info }}
                     </span>
                     <span v-else>
                         # Nie podano żadnych informacji #

@@ -5,25 +5,16 @@ import TitleView from '@/components/TitleView.vue'
 import SelectCongregation from '@/components/SelectCongregation.vue'
 import ValidityInputGroup from '@/components/input/ValidityInputGroup.vue'
 
-const props = defineProps(['modelValue'])
-
-const congregationName = computed({
-    get() {
-        return props.modelValue
-    },
-    set(value) {
-        emit('update:modelValue', value)
-    }
-})
+const congregationName = defineModel()
+const congregationNumber = ref('')
 
 const showAlert = ref(false)
-const congregationNumber = ref('')
 
 const isLoginBtnEnabled = computed({
     get() { return congregationName.value.length > 0 && congregationNumber.value.length > 0 }
 })
 
-const emit = defineEmits(['update:modelValue', 'next'])
+const emit = defineEmits(['next'])
 function onLoginClicked() {
     let data = {
         login: congregationName.value,
