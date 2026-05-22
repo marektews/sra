@@ -9,9 +9,11 @@ import BusView from '@/view/BusView.vue'
 import PilotIntroView from '@/view/PilotIntroView.vue'
 import PilotDataView from '@/view/PilotDataView.vue'
 import AdditionalInformation from '@/view/AdditionalInformation.vue'
+import NoBusQuestion from '@/view/NoBusQuestion.vue'
 
 import SummaryView from '@/view/SummaryView.vue'
 import ConfirmationView from '@/view/ConfirmationView.vue'
+import ConfirmationNoBusView from './view/ConfirmationNoBusView.vue'
 
 const mode = ref(0)
 const congregation = ref('')
@@ -92,8 +94,8 @@ function onAgain() {
 <template>
     <div class="container">
         <header>
-            <!-- <img src="@/assets/logo.svg" /> -->
-            <FontAwesomeIcon :icon="faRegistered" size="3x" />
+            <img src="@/assets/event-logo-full.svg" width="96" />
+            <!-- <FontAwesomeIcon :icon="faRegistered" size="3x" /> -->
             <div>Ankieta rejestracji autokarów / autobusów</div>
         </header>
 
@@ -101,12 +103,17 @@ function onAgain() {
             <IntroView v-if="mode === 0" @next="mode = 1" />
             <CongregationView v-else-if="mode === 1"
                 v-model="congregation"
-                @next="mode = 2" 
+                @next="mode = 9" 
+            />
+            <NoBusQuestion v-else-if="mode === 9"
+                :congregation="congregation"
+                @next="mode = 2"
+                @finished="mode = 12"
             />
             <BusView v-else-if="mode === 2"
                 v-model="bus"
                 @next="mode = 3"
-                @back="mode = 1"
+                @back="mode = 9"
             />
             <PilotIntroView v-else-if="mode === 3"
                 v-model="one_pilot"
@@ -148,8 +155,11 @@ function onAgain() {
                 @submit="mode = 11"
             />
 
-            <ConfirmationView v-else 
+            <ConfirmationView v-else-if="mode === 11"
                 @again="onAgain" 
+            />
+
+            <ConfirmationNoBusView v-else-if="mode === 12"
             />
         </main>
     </div>

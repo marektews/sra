@@ -72,7 +72,7 @@ function onSubmit() {
             info: props.info,
         },
     }
-    fetch('/api/sra/submit', {
+    fetch('/api/sra/submit/bus', {
         method: "POST",
         cache: "no-cache",
         headers: {
