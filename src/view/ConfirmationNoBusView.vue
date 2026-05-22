@@ -6,7 +6,7 @@ import { faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 <template>
     <div class="alert alert-success my-alert" role="alert">
         <div>Dziękujemy!</div>
-        <div>Informacja została poprawnie wysłane.</div>
+        <div>Informacja została poprawnie wysłana.</div>
     </div>
 
     <div class="alert alert-secondary my-info" role="alert">

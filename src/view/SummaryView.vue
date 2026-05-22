@@ -147,14 +147,14 @@ function onSubmit() {
                 <div class="summary-cell-label">Imię i nazwisko:</div>
                 <div class="summary-cell-value">
                     <a href="#" @click="$emit('correction', 4)">
-                        {{ props.pilot[0].firstname }} {{ props.pilot[0].lastname }}
+                        {{ props.pilot[0].fn }} {{ props.pilot[0].ln }}
                     </a>
                 </div>
                 
                 <div class="summary-cell-label">Numer telefonu:</div>
                 <div class="summary-cell-value">
                     <a href="#" @click="$emit('correction', 4)">
-                        {{ props.pilot[0].phone.direct }} {{ props.pilot[0].phone.number }}
+                        {{ props.pilot[0].phone.country_code }} {{ props.pilot[0].phone.number }}
                     </a>
                 </div>
 
@@ -181,14 +181,14 @@ function onSubmit() {
                     <div class="summary-cell-label">Imię i nazwisko:</div>
                     <div class="summary-cell-value">
                         <a href="#" @click="$emit('correction', 4+index)">
-                            {{ pilot.firstname }} {{ pilot.lastname }}
+                            {{ pilot.fn }} {{ pilot.ln }}
                         </a>
                     </div>
                     
                     <div class="summary-cell-label">Numer telefonu:</div>
                     <div class="summary-cell-value">
                         <a href="#" @click="$emit('correction', 4+index)">
-                            {{ pilot.phone.direct }} {{ pilot.phone.number }}
+                            {{ pilot.phone.country_code }} {{ pilot.phone.number }}
                         </a>
                     </div>
 

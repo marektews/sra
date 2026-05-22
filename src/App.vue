@@ -25,29 +25,29 @@ let bus = reactive({
     parking_mode: "not_needed"
 })
 let pilot_1 = reactive({
-    firstname: "",
-    lastname: "",
+    fn: "",
+    ln: "",
     email: "",
     phone: {
-        direct: "+48",
+        country_code: "+48",
         number: ""
     },
 })
 let pilot_2 = reactive({
-    firstname: "",
-    lastname: "",
+    fn: "",
+    ln: "",
     email: "",
     phone: {
-        direct: "+48",
+        country_code: "+48",
         number: ""
     },
 })
 let pilot_3 = reactive({
-    firstname: "",
-    lastname: "",
+    fn: "",
+    ln: "",
     email: "",
     phone: {
-        direct: "+48",
+        country_code: "+48",
         number: ""
     },
 })
@@ -62,29 +62,29 @@ function onAgain() {
         parking_mode: "not_needed"
     })
     pilot_1 = reactive({   
-        firstname: "",
-        lastname: "",
+        fn: "",
+        ln: "",
         email: "",
         phone: {
-            direct: "+48",
+            country_code: "+48",
             number: ""
         },
     })
     pilot_2 = reactive({
-        firstname: "",
-        lastname: "",
+        fn: "",
+        ln: "",
         email: "",
         phone: {
-            direct: "+48",
+            country_code: "+48",
             number: ""
         },
     })
     pilot_3 = reactive({
-        firstname: "",
-        lastname: "",
+        fn: "",
+        ln: "",
         email: "",
         phone: {
-            direct: "+48",
+            country_code: "+48",
             number: ""
         },
     })

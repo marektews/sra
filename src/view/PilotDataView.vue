@@ -12,11 +12,11 @@ const pilot = reactive(props.modelValue)
 const dupPilot = ref(false)
 const timer = ref(null)
 
-const onPhoneDirectChanged = (e) => {
+const onPhoneCountryCodeChanged = (e) => {
     e.target.reportValidity()
 }
 const phoneLength = computed(() => {
-    return pilot.phone.direct === "+7" ? 10 : 9
+    return pilot.phone.country_code === "+7" ? 10 : 9
 })
 const phoneFormat = computed(() => {
     if(phoneLength.value === 10)
@@ -25,7 +25,7 @@ const phoneFormat = computed(() => {
         return "Wpisz 9 cyfr; format: 123456789"
 })
 const phonePattern = computed(() => {
-    return pilot.phone.direct === "+7"
+    return pilot.phone.country_code === "+7"
         ? "[0-9]{10}"
         : "[0-9]{9}"
 })
@@ -90,7 +90,7 @@ const isNextBtnEnabled = computed(() => {
 
         <ValidityInputGroup
             class="mt-3"
-            v-model="pilot.firstname"
+            v-model="pilot.fn"
             title="Imię"
             required
             @valid="validValues[0] = $event"
@@ -98,7 +98,7 @@ const isNextBtnEnabled = computed(() => {
 
         <ValidityInputGroup
             class="mt-3"
-            v-model="pilot.lastname"
+            v-model="pilot.ln"
             title="Nazwisko"
             required
             @valid="validValues[1] = $event"
@@ -108,10 +108,10 @@ const isNextBtnEnabled = computed(() => {
             <label class="form-label">Numer telefonu</label>
             <div class="input-group">
                 <select 
-                    v-model="pilot.phone.direct"
+                    v-model="pilot.phone.country_code"
                     class="form-select form-select-lg flex-grow-0" 
                     style="min-width: 90pt"
-                    @change="onPhoneDirectChanged"
+                    @change="onPhoneCountryCodeChanged"
                 >
                     <option value="+48">PL: +48</option>
                     <option value="+7">RU: +7</option>
