@@ -94,8 +94,8 @@ function onAgain() {
 <template>
     <div class="container">
         <header>
-            <img src="@/assets/event-logo-full.svg" width="96" />
-            <!-- <FontAwesomeIcon :icon="faRegistered" size="3x" /> -->
+            <!-- <img src="@/assets/event-logo-full.svg" width="96" /> -->
+            <FontAwesomeIcon :icon="faRegistered" size="3x" />
             <div>Ankieta rejestracji autokarów / autobusów</div>
         </header>
 
